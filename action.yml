@@ -5,9 +5,13 @@ branding:
   color: 'blue'
 inputs:
   path:
-    description: path
+    description: Path
     required: true
     default: .
+  dotfiles:
+    description: Include dotfiles
+    required: false
+    default: false
 outputs:
   json:
     description: JSON
@@ -19,8 +23,10 @@ runs:
       shell: bash
     - id: ls
       run: |
-        json=$(ls | jq -Rsc 'split("\n")[:-1]')
+        json=$(ls ${options} | jq -Rsc 'split("\n")[:-1]')
         echo "${json}"
         echo "json=${json}" >> $GITHUB_OUTPUT
       shell: bash
       working-directory: ${{ inputs.path }}
+      env:
+        options: ${{ inputs.dotfiles == 'true' && '-A' || '' }}
