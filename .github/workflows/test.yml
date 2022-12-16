@@ -30,6 +30,14 @@ jobs:
           json: ${{ steps.ls.outputs.json }}
         if: ${{ runner.os == 'Windows' }}
 
+      - id: ls-path
+        uses: ./
+        with:
+          path: .github
+      - run: echo "${json}"
+        env:
+          json: ${{ steps.ls.outputs.json }}
+
   test-passing:
     needs: [ test ]
     runs-on: ubuntu-latest
