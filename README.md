@@ -1,78 +1,53 @@
-[![Test](https://github.com/snow-actions/composite-action-template/actions/workflows/test.yml/badge.svg)](https://github.com/snow-actions/composite-action-template/actions/workflows/test.yml)
+# ls
 
-# Create a Composite Action
+[![Test](https://github.com/snow-actions/ls/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/snow-actions/ls/actions/workflows/test.yml)
 
-Click the `Use this template` to bootstrap the creation of a [composite action](https://docs.github.com/en/actions/creating-actions/creating-a-composite-action).:rocket:
-
-This template includes tests, a validation workflow and versioning guidance.
-
-Learn how to use this template at [Wiki](https://github.com/snow-actions/composite-action-template/wiki).
+`ls` to JSON.
 
 ## Usage
 
-### Basic
-
 ```yml
 steps:
-  - uses: snow-actions/composite-action-template@v1.0.0
+  - id: ls
+    uses: snow-actions/ls@v1.0.0
+  - run: echo "${json}"
+    env:
+      json: ${{ steps.ls.outputs.json }}
 ```
 
-### Optional
-
-```yml
-steps:
-  - uses: snow-actions/composite-action-template@v1.0.0
-    with:
-      who-to-greet: Your name
-```
-
-## Environment variables
-
-| Name | Description | Default | Required |
-| - | - | - | - |
-| `WHO_TO_GREET` | Who to greet | `World` | no |
-
-## Inputs
+## Inputs & Outputs
 
 See [action.yml](action.yml)
 
+### Inputs
+
 | Name | Description | Default | Required |
 | - | - | - | - |
-| `who-to-greet` | Who to greet | `World` | yes |
+| `path` | Path | `.` | yes |
 
-## Outputs
-
-See [action.yml](action.yml)
+### Outputs
 
 | Name | Description |
 | - | - |
-| `greet` | The word we greeted you |
+| `json` | JSON |
 
 ## Supported
 
 ### Runners
 
-- `ubuntu-22.04`
-- `ubuntu-20.04`
-- `ubuntu-18.04`
-- `windows-2022`
-- `windows-2019`
-- `macos-11`
-- `macos-10.15`
+- `ubuntu-*`
+- `windows-*`
+- `macos-*`
 - `self-hosted`
 
 ### Events
 
 - Any
-<!--
-- `push`
-- `pull_request`
--->
 
 ## Dependencies
 
-- [actions/cache](https://github.com/actions/cache) >= 3.0.0
-- [GitHub CLI](https://cli.github.com/) >= 2.6.0
+- Bash
+- [jq](https://stedolan.github.io/jq/)
 
 ## Contributing
 
