@@ -29,3 +29,11 @@ jobs:
         env:
           json: ${{ steps.ls.outputs.json }}
         if: ${{ runner.os == 'Windows' }}
+
+  test-passing:
+    needs: [ test ]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - run: echo 'All tests have passed.'
