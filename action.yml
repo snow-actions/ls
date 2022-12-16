@@ -19,9 +19,8 @@ runs:
       shell: bash
     - id: ls
       run: |
-        json=$(ls ${path} | jq -Rsc 'split("\n")[:-1]')
+        json=$(ls | jq -Rsc 'split("\n")[:-1]')
         echo "${json}"
         echo "json=${json}" >> $GITHUB_OUTPUT
       shell: bash
-      env:
-        path: ${{ inputs.path }}
+      working-directory: ${{ inputs.path }}
