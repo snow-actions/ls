@@ -53,11 +53,11 @@ jobs:
         uses: ./
         with:
           dotfiles: true
-      - run: test "${json}" = '[".github","LICENSE","README.md","action.yml"]'
+      - run: test "${json}" = '[".git",".github","LICENSE","README.md","action.yml"]'
         env:
           json: ${{ steps.ls-A.outputs.json }}
         if: ${{ runner.os != 'Windows' }}
-      - run: test $Env:json = '[".github","LICENSE","README.md","action.yml"]'
+      - run: test $Env:json = '[".git",".github","LICENSE","README.md","action.yml"]'
         env:
           json: ${{ steps.ls-A.outputs.json }}
         if: ${{ runner.os == 'Windows' }}
