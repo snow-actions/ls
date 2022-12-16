@@ -1,4 +1,4 @@
-name: ls
+name: ls to JSON
 description: ls to JSON
 branding:
   icon: 'code'  
