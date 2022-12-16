@@ -51,6 +51,8 @@ jobs:
       - name: ls -A
         id: ls-A
         uses: ./
+        with:
+          dotfiles: true
       - run: test "${json}" = '[".github","LICENSE","README.md","action.yml"]'
         env:
           json: ${{ steps.ls-A.outputs.json }}
