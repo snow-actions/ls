@@ -23,7 +23,7 @@ jobs:
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
-      - name: Create release draft
+      - name: Create release
         id: release
         run: |
           version=${RELEASE_BRANCH#release/}
