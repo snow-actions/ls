@@ -21,6 +21,6 @@ jobs:
 
       - id: ls
         uses: ./
-      - run: echo "${json}"
+      - run: test "${json}" = '["LICENSE","README.md","action.yml"]'
         env:
-          GREET: ${{ steps.ls.outputs.json }}
+          json: ${{ steps.ls.outputs.json }}
