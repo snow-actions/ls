@@ -15,9 +15,12 @@ outputs:
 runs:
   using: composite
   steps:
+    - run: jq --version
+      shell: bash
     - id: ls
       run: |
         json=$(ls | jq -Rsc 'split("\n")[:-1]')
         echo "${json}"
         echo "json=${json}" >> $GITHUB_OUTPUT
       shell: bash
+      working-directory: ${{ inputs.path }}

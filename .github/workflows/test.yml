@@ -19,7 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - id: ls
+      - name: ls .
+        id: ls
         uses: ./
       - run: test "${json}" = '["LICENSE","README.md","action.yml"]'
         env:
@@ -28,6 +29,20 @@ jobs:
       - run: test $Env:json = '["LICENSE","README.md","action.yml"]'
         env:
           json: ${{ steps.ls.outputs.json }}
+        if: ${{ runner.os == 'Windows' }}
+
+      - name: ls .github
+        id: ls-path
+        uses: ./
+        with:
+          path: .github
+      - run: test "${json}" = '["CODEOWNERS","dependabot.yml","workflows"]'
+        env:
+          json: ${{ steps.ls-path.outputs.json }}
+        if: ${{ runner.os != 'Windows' }}
+      - run: test $Env:json = '["CODEOWNERS","dependabot.yml","workflows"]'
+        env:
+          json: ${{ steps.ls-path.outputs.json }}
         if: ${{ runner.os == 'Windows' }}
 
   test-passing:
