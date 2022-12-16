@@ -24,6 +24,7 @@ See [action.yml](action.yml)
 | Name | Description | Default | Required |
 | - | - | - | - |
 | `path` | Path | `.` | yes |
+| `dotfiles` | Include dotfiles | `false` | no |
 
 ### Outputs
 
