@@ -1,26 +1,23 @@
-name: 'Composite Action Template'
-description: 'Get started with Composite actions'
-inputs:
-  who-to-greet:
-    description: 'Who to greet'
-    required: true
-    default: 'World'
-outputs:
-  greet:
-    description: 'The word we greeted you'
-    value: ${{ steps.greet.outputs.word }}
-runs:
-  using: "composite"
-  steps:
-    - id: greet
-      run: |
-        GREET="Hello ${WHO}"
-        echo "${GREET}"
-        echo "${GREET}" > greet.txt
-        echo "::set-output name=word::${GREET}"
-      shell: bash
-      env:
-        WHO: ${{ inputs.who-to-greet }}
+name: ls
+description: ls to JSON
 branding:
-  icon: 'award'  
-  color: 'green'
+  icon: 'code'  
+  color: 'blue'
+inputs:
+  path:
+    description: path
+    required: true
+    default: .
+outputs:
+  json:
+    description: JSON
+    value: ${{ steps.ls.outputs.json }}
+runs:
+  using: composite
+  steps:
+    - id: ls
+      run: |
+        json=$(ls | jq -Rsc 'split("\n")[:-1]')
+        echo "${json}"
+        echo "json=${json}" >> $GITHUB_OUTPUT
+      shell: bash
