@@ -24,3 +24,8 @@ jobs:
       - run: test "${json}" = '["LICENSE","README.md","action.yml"]'
         env:
           json: ${{ steps.ls.outputs.json }}
+        if: ${{ runner.os != 'Windows' }}
+      - run: test $Env:json = '["LICENSE","README.md","action.yml"]'
+        env:
+          json: ${{ steps.ls.outputs.json }}
+        if: ${{ runner.os = 'Windows' }}
