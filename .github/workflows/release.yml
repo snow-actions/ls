@@ -27,7 +27,7 @@ jobs:
         id: release
         run: |
           version=${RELEASE_BRANCH#release/}
-          gh release create ${version} --title ${version} --generate-notes
+          gh release create ${version} --title ${version} --generate-notes --discussion-category Announcements
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
           GH_REPO: ${{ github.repository }}
